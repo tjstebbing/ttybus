@@ -1,0 +1,11 @@
+[Unit]
+Description=ttybus user message bus
+Documentation=https://github.com/tjstebbing/ttybus
+
+[Service]
+Type=simple
+ExecStart=ttybus serve --foreground
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

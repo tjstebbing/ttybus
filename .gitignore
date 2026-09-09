@@ -1,0 +1,16 @@
+# binaries
+/ttybus
+/bin/
+*.exe
+*.test
+*.out
+
+# go
+vendor/
+
+# editor / os
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/

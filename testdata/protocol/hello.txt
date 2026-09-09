@@ -1,0 +1,24 @@
+# Golden protocol lines for slice 1 parser tests.
+# Format (once tests exist): each non-comment, non-empty line is a
+# valid or invalid input; expected results live next to the parser.
+#
+# valid HELLO
+HELLO
+HELLO name=yazi pid=4123 pane=%3 cwd=/code/foo
+HELLO name=ttybus pid=1 id=cli-9
+# valid SUB/PUB
+SUB files
+UNSUB files
+PUB files
+PUB files main.go
+PUB files {"path":"main.go","line":12}
+# valid SEND / LIST
+SEND yazi-1 files main.go
+LIST
+# valid daemon → client
+OK
+OK id=cli-9
+OK n=3
+MSG files main.go
+ERR PEER no such id
+PEER id=yazi-1 name=yazi pid=4123 pane=%3 cwd=/code/foo subs=files,build
