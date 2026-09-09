@@ -1,10 +1,13 @@
-.PHONY: help build test vet fmt tidy clean
+.PHONY: help build dist test vet fmt tidy clean
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-12s\033[0m %s\n", $$1, $$2}'
 
 build: ## Build the ttybus binary
-	go build -o ttybus ./cmd/ttybus
+	go build -ldflags "-s -w -X main.version=$${VERSION:-dev}" -o ttybus ./cmd/ttybus
+
+dist: ## Cross-compile release tarballs into dist/
+	./scripts/build-release.sh
 
 test: ## Run tests (with race detector)
 	go test -race ./...

@@ -16,6 +16,9 @@ const (
 	exitTimeout = 124
 )
 
+// version is set at release with -ldflags "-X main.version=v1.2.3".
+var version = "dev"
+
 var usage = ` ________
 |[][][]|_\_
 | TTYBus   |
@@ -30,6 +33,7 @@ Usage:
   ttybus ls    [--socket PATH] [--bus NAME]
   ttybus send  --to ID CHANNEL [MESSAGE...] [--socket PATH] [--bus NAME]
   ttybus plumb [TEXT] [--socket PATH] [--bus NAME]
+  ttybus version
 
 Socket: $XDG_RUNTIME_DIR/ttybus/bus.sock (or --socket / --bus).
 See docs/PROTOCOL.md.
@@ -47,6 +51,10 @@ func run(args []string) int {
 	switch args[0] {
 	case "-h", "--help", "help":
 		fmt.Fprint(os.Stderr, usage)
+		fmt.Fprintf(os.Stderr, "\n%s\n", version)
+		return exitOK
+	case "version", "-v", "--version":
+		fmt.Println(version)
 		return exitOK
 	case "serve":
 		return cmdServe(args[1:])

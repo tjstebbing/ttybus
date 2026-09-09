@@ -44,12 +44,22 @@ PUB files /tmp/hello.go
 ## Install
 
 ```sh
-go install github.com/tjstebbing/ttybus/cmd/ttybus@latest
+curl -fsSL https://raw.githubusercontent.com/tjstebbing/ttybus/main/install.sh | sh
 ```
 
-From a checkout:
+Installs to `~/.local/bin`. Pin a release or put the binary somewhere else:
 
 ```sh
+VERSION=v0.1.0 PREFIX=/usr/local curl -fsSL https://raw.githubusercontent.com/tjstebbing/ttybus/main/install.sh | sh
+```
+
+Linux amd64/arm64 and macOS amd64/arm64. Needs `curl`, `tar`, and a GitHub release (tag `v*`).
+
+From source:
+
+```sh
+go install github.com/tjstebbing/ttybus/cmd/ttybus@latest
+# or
 make build
 ./ttybus serve --foreground
 ```

@@ -1,6 +1,7 @@
 # binaries
 /ttybus
 /bin/
+/dist/
 *.exe
 *.test
 *.out

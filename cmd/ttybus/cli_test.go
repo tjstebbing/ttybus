@@ -35,6 +35,16 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
+func TestVersion(t *testing.T) {
+	out, err := exec.Command(testBin, "version").Output()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.TrimSpace(string(out)) != "dev" {
+		t.Fatalf("version %q", out)
+	}
+}
+
 func startBus(t *testing.T) string {
 	t.Helper()
 	sock := filepath.Join(t.TempDir(), "bus.sock")
